@@ -1,0 +1,94 @@
+name: Convert YAML to JSON
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  nix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Install nix"
+        uses: cachix/install-nix-action@master
+        with:
+          install_url: https://nixos.org/nix/install
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            allow-import-from-derivation = false
+
+      - name: "Nix Magic Cache"
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Run conversion script
+        run: |
+          tmpdir=$(mktemp -d)
+
+          if [ -d "$tmpdir" ]; then
+              echo "Cloning original schemes directory"
+              git clone https://github.com/tinted-theming/schemes.git "$tmpdir"/yaml
+          else
+              echo "Failed to create temp directory" >&2
+              exit 1
+          fi
+
+          yaml_dir_base16="$tmpdir"/yaml/base16
+          yaml_dir_base24="$tmpdir"/yaml/base24
+          json_dir_base16="$tmpdir"/json/base16
+          json_dir_base24="$tmpdir"/json/base24
+
+          # ensure JSON directories exist
+          mkdir -p "$json_dir_base16"
+          mkdir -p "$json_dir_base24"
+
+          # convert YAML to JSON
+          convert_yaml_to_json() {
+              echo "Converting"
+              local yaml_file="$1"
+              local json_file="$2"
+              nix run --builders "" --substituters "https://cache.nixos.org" .#convert-scheme -- "$yaml_file" "$json_file"
+          }
+
+          # convert YAML files in base16 directory
+          for yaml_file in "$yaml_dir_base16"/*.yaml; do
+              base_name=$(basename "$yaml_file" .yaml)
+              convert_yaml_to_json "$yaml_file" "$json_dir_base16/$base_name.json"
+          done
+
+          # convert YAML files in base24 directory
+          for yaml_file in "$yaml_dir_base24"/*.yaml; do
+              base_name=$(basename "$yaml_file" .yaml)
+              convert_yaml_to_json "$yaml_file" "$json_dir_base24/$base_name.json"
+          done
+
+          # move converted JSON files to current directory
+          mkdir -p json/{base16,base24}
+          mv "$json_dir_base16"/*.json json/base16
+          mv "$json_dir_base24"/*.json json/base24
+
+          # Cleanup
+          rm -rf "$tmpdir"
+
+      - name: Commit files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add *.json
+          git commit -m "CI: update JSON schemes" || echo "No changes to commit"
+
+      - name: Push changes
+        if: success()
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
