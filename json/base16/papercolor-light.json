@@ -1,7 +1,7 @@
 {
     "system": "base16",
     "name": "PaperColor Light",
-    "author": "Jon Leopard (http://github.com/jonleopard) based on PaperColor Theme (https://github.com/NLKNguyen/papercolor-theme)",
+    "author": "Jon Leopard (http://github.com/jonleopard)\nbased on PaperColor Theme (https://github.com/NLKNguyen/papercolor-theme)\n",
     "variant": "light",
     "palette": {
         "base00": "eeeeee",
