@@ -7,16 +7,16 @@ one convenient library.
 ## How does it work?
 
 For some obscure reason[^1] all schemes provided by tinted-theming is in YAML
-under one unified repository. We convert each YAML scheme to JSON to ensure the
-schemes are in a format Nix can read, then read them and expose them under a
+and under one unified repository. We convert each YAML scheme to JSON to ensure
+the schemes are in a format Nix can read, then read them and expose them under a
 flake output.
 
 ## How do I use this?
 
 Basix be used as a flake input, or imported from a tarball.
 
-To get a colorscheme, import either `schemeData.base16` or `schemeData.base24`
-from the outputs from this flake to import the colorschemes for yourself.
+To get a color scheme, import either `schemeData.base16` or `schemeData.base24`
+from the outputs from this flake to import the color schemes for yourself.
 
 ```bash
 nix-repl> :p schemeData.base16.decaf
@@ -45,6 +45,20 @@ nix-repl> :p schemeData.base16.decaf
   variant = "dark";
 }
 ```
+
+## Why?
+
+There are not many theming solutions for Nix. Those that already exist are
+either too convoluted, or straight up bad in terms of code quality or/and
+execution. This leads me to use (and recommend) home-baked theming modules for
+in-home usage, but there was not a good Base16 solution on Nix. Basix aims to
+solve this issue by providing you an auto-updated collection of Base16 and
+Base24 color palettes. As opposed to traditional hacks needed to convert YAML to
+JSON and then read it, you can simply consume attribute sets derived from JSON
+schemes while Basix does the heavy lifting for you.
+
+Basix might come in handy in scenarios you wish to theme individual applications
+from a pre-defined color palette.
 
 ## Credits
 
