@@ -2,6 +2,7 @@
     "system": "base16",
     "name": "Ros\u00e9 Pine Moon",
     "author": "Emilia Dunfelt <edun@dunfelt.se>",
+    "slug": "rose-pine-moon",
     "variant": "dark",
     "palette": {
         "base00": "#232136",
