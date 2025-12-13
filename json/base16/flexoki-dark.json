@@ -1,0 +1,25 @@
+{
+    "system": "base16",
+    "name": "Flexoki Dark",
+    "author": "Steph Ango (https://github.com/kepano/flexoki)",
+    "description": "Inky color scheme for prose and code",
+    "variant": "dark",
+    "palette": {
+        "base00": "#100F0F",
+        "base01": "#1C1B1A",
+        "base02": "#282726",
+        "base03": "#575653",
+        "base04": "#878580",
+        "base05": "#CECDC3",
+        "base06": "#E6E4D9",
+        "base07": "#FFFCF0",
+        "base08": "#D14D41",
+        "base09": "#DA702C",
+        "base0A": "#D0A215",
+        "base0B": "#879A39",
+        "base0C": "#3AA99F",
+        "base0D": "#4385BE",
+        "base0E": "#8B7EC8",
+        "base0F": "#CE5D97"
+    }
+}

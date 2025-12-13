@@ -1,0 +1,33 @@
+{
+    "system": "base24",
+    "name": "Flexoki Light",
+    "author": "Steph Ango (https://github.com/kepano/flexoki)",
+    "description": "Inky color scheme for prose and code",
+    "variant": "light",
+    "palette": {
+        "base00": "#FFFCF0",
+        "base01": "#F2F0E5",
+        "base02": "#E6E4D9",
+        "base03": "#CECDC3",
+        "base04": "#9F9D96",
+        "base05": "#403E3C",
+        "base06": "#282726",
+        "base07": "#100F0F",
+        "base08": "#AF3029",
+        "base09": "#BC5215",
+        "base0A": "#AD8301",
+        "base0B": "#66800B",
+        "base0C": "#24837B",
+        "base0D": "#205EA6",
+        "base0E": "#5E409D",
+        "base0F": "#A02F6F",
+        "base10": "#F2F0E5",
+        "base11": "#FFFFFF",
+        "base12": "#D14D41",
+        "base13": "#DA702C",
+        "base14": "#D0A215",
+        "base15": "#879A39",
+        "base16": "#3AA99F",
+        "base17": "#4385BE"
+    }
+}
