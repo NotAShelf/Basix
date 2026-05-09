@@ -1,0 +1,24 @@
+{
+    "system": "base16",
+    "name": "Kissa Latte",
+    "author": "rwendell (https://github.com/rwendell/kissa)",
+    "variant": "light",
+    "palette": {
+        "base00": "#F5F4F0",
+        "base01": "#E8E7E3",
+        "base02": "#D5D2CB",
+        "base03": "#91887D",
+        "base04": "#746C62",
+        "base05": "#1F1C16",
+        "base06": "#6E6459",
+        "base07": "#FEFCFA",
+        "base08": "#9E3E3E",
+        "base09": "#8F5D22",
+        "base0A": "#7D6820",
+        "base0B": "#387050",
+        "base0C": "#287070",
+        "base0D": "#3468A8",
+        "base0E": "#6438A0",
+        "base0F": "#943A68"
+    }
+}

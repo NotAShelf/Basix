@@ -1,0 +1,33 @@
+{
+    "system": "base24",
+    "name": "Alucard",
+    "author": "clach04 (https://github.com/clach04)",
+    "description": "Alucard Classic - Dracula light, based on https://github.com/dracula/draculatheme.com/blob/main/content/spec.mdx",
+    "variant": "light",
+    "palette": {
+        "base00": "#fffbeb",
+        "base01": "#ceccc0",
+        "base02": "#cfcfde",
+        "base03": "#6c664b",
+        "base04": "#4c4a3d",
+        "base05": "#1f1f1f",
+        "base06": "#1f1f1f",
+        "base07": "#2c2b31",
+        "base08": "#cb3a2a",
+        "base09": "#A34D14",
+        "base0A": "#846e15",
+        "base0B": "#14710a",
+        "base0C": "#036a96",
+        "base0D": "#644ac9",
+        "base0E": "#a3144d",
+        "base0F": "#792219",
+        "base10": "#fdf8e2",
+        "base11": "#f5f0da",
+        "base12": "#d74c3d",
+        "base13": "#9e841a",
+        "base14": "#198d0c",
+        "base15": "#047fb4",
+        "base16": "#7862d0",
+        "base17": "#bf185a"
+    }
+}
