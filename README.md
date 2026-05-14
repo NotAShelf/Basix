@@ -1,22 +1,32 @@
 # Basix
 
+[@tinted-theming/schemes]: https://github.com/tinted-theming/schemes
+
+An over-engineered, reusable Nix flake for _all_ Base16 and Base24
+
 An over-engineered Nix flake for _all_ Base16 and Base24 themes from
-[tinted-theming/schemes](https://github.com/tinted-theming/schemes), exposed as
-one convenient library.
+[@tinted-theming/schemes] , exposed as one convenient library and opinionated
+theme packages for GTK and QT theming sustems.
 
 ## How does it work?
 
-For some obscure reason[^1] all schemes provided by tinted-theming is in YAML
-and under one unified repository. We convert each YAML scheme to JSON to ensure
-the schemes are in a format Nix can read, then read them and expose them under a
-flake output.
+For some obscure reason, [^1] all schemes provided by tinted-theming are YAML
+files vendored in one massive repository. Basix, in turn, fetches the theme data
+from the tinted-theming repository and converts them into JSON to ensure the
+schemes are available in a format Nix can read, parse and expose under the flake
+outputs.
 
-## How do I use this?
+Downloading and parsing is done by a
+[quick and dirty Python script](./packages/convert-scheme/) and then exposed by
+the flake as `schemeData`. You can also import the Nix2 endpoint provided by
+`default.nix` and get `schemeData` that way.
 
-Basix be used as a flake input, or imported from a tarball.
+### How do I use this?
 
-To get a color scheme, import either `schemeData.base16` or `schemeData.base24`
-from the outputs from this flake to import the color schemes for yourself.
+Basix can be used as a flake input, or imported from a tarball. To get a color
+scheme, import either `schemeData.base16` or `schemeData.base24` from the
+outputs from this flake to import the color schemes for yourself. For example,
+in the Nix REPL:
 
 ```bash
 nix-repl> :p schemeData.base16.decaf
@@ -46,6 +56,52 @@ nix-repl> :p schemeData.base16.decaf
 }
 ```
 
+You can get a list of schemes by looking into [`json/`](./json) for the
+appropriate theming model or evaluate available themes in the Nix REPL using
+`attrNames` or similar.
+
+### Generated theme packages
+
+Basix also generates "conservative" GTK/Qt themes for every Base16/Base24
+scheme:
+
+- `themePackages.<system>.base16.<slug>`
+- `themePackages.<system>.base24.<slug>`
+- `packages.<system>.themes-base16`
+- `packages.<system>.themes-base24`
+- `packages.<system>.themes-all`
+
+You can build them if you so wish:
+
+```bash
+# Build all packages
+$ nix build .#themes-all
+
+# Build base16 theme packages
+$ nix build .#themes-base16
+
+# Build only the 'decaf' theme package
+$ nix build .#themePackages.x86_64-linux.base16.decaf
+```
+
+`themePackages` is keyed by system, so the system segment is required.
+
+Generated install paths include:
+
+- GTK themes under `share/themes/Basix-<slug>/...`
+  - `gtk-2.0/gtkrc`
+  - `gtk-3.0/gtk.css`
+  - `gtk-4.0/gtk.css`
+- Qt color schemes under:
+  - `share/qt5ct/colors/Basix-<slug>.conf`
+  - `share/qt6ct/colors/Basix-<slug>.conf`
+- Kvantum theme assets under:
+  - `share/Kvantum/Basix-<slug>/Basix-<slug>.kvconfig`
+  - `share/Kvantum/Basix-<slug>/Basix-<slug>.svg`
+
+These are generated from Base16/Base24 palettes and intentionally keep styling
+flat and conservative for broad compatibility.
+
 ## Why?
 
 There are not many theming solutions for Nix. Those that already exist are
@@ -70,7 +126,7 @@ from a pre-defined color palette.
 
 Licensed under the [GNU General Public License v3.0](LICENSE).
 
-[^1]:
-    I'm being generous here. The obscure reason is the myth that YAML is human
-    readable. Guess what? It is [actually nowhere near human readable and you
+[^1]: I'm being generous here. The obscure reason is the myth that YAML is human
+    readable. Guess what? It is
+    [actually nowhere near human readable and you
     should avoid it](https://ruudvanasseldonk.com/2023/01/11/the-yaml-document-from-hell)
