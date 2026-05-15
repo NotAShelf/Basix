@@ -2,11 +2,9 @@
 
 [@tinted-theming/schemes]: https://github.com/tinted-theming/schemes
 
-An over-engineered, reusable Nix flake for _all_ Base16 and Base24
-
-An over-engineered Nix flake for _all_ Base16 and Base24 themes from
-[@tinted-theming/schemes] , exposed as one convenient library and opinionated
-theme packages for GTK and QT theming sustems.
+An over-engineered, reusable Nix flake for _all_ Base16 and Base24 themes from
+[@tinted-theming/schemes], exposed as one convenient schema collection, library
+and opinionated theme packages for GTK and QT theming systems.
 
 ## How does it work?
 
