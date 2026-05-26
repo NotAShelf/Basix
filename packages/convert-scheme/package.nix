@@ -1,6 +1,6 @@
 {pkgs, ...}:
 pkgs.writers.writePython3Bin "convert-scheme" {
-  libraries = with pkgs.python311Packages; [pyyaml];
+  libraries = with pkgs.python3Packages; [pyyaml];
   flakeIgnore = ["E302" "E305" "E501"];
 } ''
   import argparse
