@@ -1,6 +1,6 @@
 {pkgs, ...}:
 pkgs.writers.writePython3Bin "convert-scheme" {
-  libraries = with pkgs.python311Packages; [pyyaml];
+  libraries = with pkgs.python3Packages; [pyyaml];
   flakeIgnore = ["E302" "E305" "E501"];
 } ''
   import argparse
@@ -9,7 +9,7 @@ pkgs.writers.writePython3Bin "convert-scheme" {
 
   def yaml_to_json(yaml_file, json_file):
       with open(yaml_file, 'r') as yml_file:
-          data = yaml.load(yml_file, Loader=yaml.FullLoader)
+          data = yaml.safe_load(yml_file)
 
       with open(json_file, 'w') as json_file:
           json.dump(data, json_file, indent=4)
